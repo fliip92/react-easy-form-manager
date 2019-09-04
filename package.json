@@ -4,7 +4,7 @@
   "description": "plug and play form component",
   "author": "fliip92",
   "license": "MIT",
-  "repository": "fliip92/easy-form-manager",
+  "repository": "fliip92/react-easy-form",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
