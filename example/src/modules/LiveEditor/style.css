@@ -1,0 +1,9 @@
+.live-container{
+  width: 80% !important;
+  margin: auto !important
+}
+.form-container-custom-className{
+  margin: 25px auto 50px;
+  width: 80%;
+  display: grid;
+}

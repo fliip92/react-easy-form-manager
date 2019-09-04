@@ -1,20 +1,30 @@
 {
-  "name": "easy-form-manager-example",
-  "homepage": "https://fliip92.github.io/easy-form-manager",
-  "version": "0.0.0",
-  "license": "MIT",
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "Describe demo here",
   "private": true,
-  "dependencies": {
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-scripts": "^1.1.4",
-    "easy-form-manager": "link:.."
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "build": "nwb build-react-app",
+    "clean": "nwb clean-app",
+    "start": "nwb serve-react-app",
+    "test": "nwb test-react",
+    "test:coverage": "nwb test-react --coverage",
+    "test:watch": "nwb test-react --server"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.3.3",
+    "easy-form-manager": "^1.0.4",
+    "mobx": "^5.13.0",
+    "mobx-state-tree": "^3.14.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-live": "^2.2.0",
+    "react-swipeable-views": "^0.13.3"
+  },
+  "devDependencies": {
+    "nwb": "0.21.x"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": ""
 }
