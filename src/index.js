@@ -5,38 +5,36 @@ import { formStore } from './Store'
 const searchObj = (obj, query, fields) => {
   for (let key in obj) {
     let value = obj[key]
+    if (typeof value === 'object' || typeof value === 'symbol') {
+      searchObj(value, query, fields)
+    }
     if (key === query && value !== 'submit') {
       fields[value] = {
         id: value
       }
-      return 0
-    } else if (typeof value === 'object') {
-      searchObj(value, query, fields)
-    } else {
-      return 0
     }
   };
 }
 
-const trampoline = (fn) => {
-  while (fn && typeof fn === 'function') {
-    fn = fn()
+const trampoline = fn => (...args) => {
+  let result = fn(...args)
+  while (typeof result === 'function') {
+    result = result()
   }
+  return result
 }
 
 const generateStore = props => {
   let fields = {}
+  const SearchTrampoline = trampoline(searchObj)
   if (Array.isArray(props.children)) {
-    props.children.map(children => {
-      trampoline(function () {
-        return searchObj(children, 'fieldid', fields)
-      })
-    })
+    props.children.map(children =>
+      SearchTrampoline(children, 'fieldid', fields)
+    )
   } else {
-    trampoline(function () {
-      return searchObj(props.children, 'fieldid', fields)
-    })
+    SearchTrampoline(props.children, 'fieldid', fields)
   }
+  console.log(fields)
   return fields
 }
 
@@ -59,8 +57,12 @@ const Form = observer(
   class Form extends Component {
     constructor(props) {
       super(props)
-      let fields = generateStore(props)
-      store = formStore.create({ fields })
+      store = formStore.create({})
+      if (props.fieldsid) {
+        store.createFieldsWithArray(props.fieldsid)
+      } else {
+        store.createFields(props)
+      }
       values = store.values
       getFieldValue = store.getFieldValue
       setValue = store.setValue
